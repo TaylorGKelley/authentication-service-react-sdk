@@ -10,6 +10,7 @@ type AuthContextType = {
   setUser: Dispatch<SetStateAction<User | null>>;
   login: ({ accessToken, user }: { accessToken: string; user: User }) => void;
   logout: () => void;
+  csrfToken: string;
 };
 
 export default AuthContextType;

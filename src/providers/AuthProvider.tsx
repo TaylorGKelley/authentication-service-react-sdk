@@ -167,6 +167,7 @@ const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
     setUser,
     login,
     logout,
+    csrfToken,
   } as AuthContextType;
 
   return (

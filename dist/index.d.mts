@@ -35,6 +35,7 @@ type AuthContextType = {
         user: User;
     }) => void;
     logout: () => void;
+    csrfToken: string;
 };
 
 export { type AuthContextType, AuthProvider, type User, api, useAuthContext };

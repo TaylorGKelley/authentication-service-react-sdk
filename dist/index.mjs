@@ -186,7 +186,8 @@ var AuthProviderInner = ({ children }) => {
     user,
     setUser,
     login,
-    logout
+    logout,
+    csrfToken
   };
   return /* @__PURE__ */ React5.createElement(AuthContext_default.Provider, { value: contextValue }, children);
 };
