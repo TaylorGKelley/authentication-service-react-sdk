@@ -20,11 +20,11 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.14.1",
-    "@types/react": "^19.1.2",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@types/react": "^19.1.2",
     "axios": "^1.8.4",
     "react": "^19.1.0"
   }
