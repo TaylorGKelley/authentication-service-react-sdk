@@ -38,4 +38,4 @@ type AuthContextType = {
     csrfToken: string;
 };
 
-export { type AuthContextType, AuthProvider, type User, api, useAuthContext };
+export { type AuthContextType, AuthProvider, type User, api, useAuthContext as useAuth };

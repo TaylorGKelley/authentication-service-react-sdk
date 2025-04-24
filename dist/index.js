@@ -32,7 +32,7 @@ var index_exports = {};
 __export(index_exports, {
   AuthProvider: () => AuthProvider_default,
   api: () => api_default,
-  useAuthContext: () => useAuthContext_default
+  useAuth: () => useAuth_default
 });
 module.exports = __toCommonJS(index_exports);
 
@@ -227,15 +227,15 @@ var AuthProvider = ({ children }) => {
 };
 var AuthProvider_default = AuthProvider;
 
-// src/hooks/useAuthContext.ts
+// src/hooks/useAuth.ts
 var import_react6 = require("react");
 var useAuthContext = () => {
   return (0, import_react6.useContext)(AuthContext_default);
 };
-var useAuthContext_default = useAuthContext;
+var useAuth_default = useAuthContext;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AuthProvider,
   api,
-  useAuthContext
+  useAuth
 });

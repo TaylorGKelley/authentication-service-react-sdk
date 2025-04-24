@@ -196,14 +196,14 @@ var AuthProvider = ({ children }) => {
 };
 var AuthProvider_default = AuthProvider;
 
-// src/hooks/useAuthContext.ts
+// src/hooks/useAuth.ts
 import { useContext as useContext2 } from "react";
 var useAuthContext = () => {
   return useContext2(AuthContext_default);
 };
-var useAuthContext_default = useAuthContext;
+var useAuth_default = useAuthContext;
 export {
   AuthProvider_default as AuthProvider,
   api_default as api,
-  useAuthContext_default as useAuthContext
+  useAuth_default as useAuth
 };
