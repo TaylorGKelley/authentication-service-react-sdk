@@ -1,5 +1,5 @@
 // src/providers/AuthProvider.tsx
-import {
+import React5, {
   useEffect as useEffect2,
   useLayoutEffect,
   useState as useState2
@@ -53,7 +53,10 @@ var useCSRFContext_default = useCSRFContext;
 import axios3 from "axios";
 
 // src/providers/CSRFProvider.tsx
-import { useEffect, useState } from "react";
+import React4, {
+  useEffect,
+  useState
+} from "react";
 import axios2 from "axios";
 var CSRFProvider = ({ children }) => {
   const [csrfToken, setCsrfToken] = useState();
@@ -72,7 +75,7 @@ var CSRFProvider = ({ children }) => {
     };
     fetchCSRFToken();
   }, []);
-  return /* @__PURE__ */ React.createElement(CSRFContext_default.Provider, { value: csrfToken }, children);
+  return /* @__PURE__ */ React4.createElement(CSRFContext_default.Provider, { value: csrfToken }, children);
 };
 var CSRFProvider_default = CSRFProvider;
 
@@ -185,10 +188,10 @@ var AuthProviderInner = ({ children }) => {
     login,
     logout
   };
-  return /* @__PURE__ */ React.createElement(AuthContext_default.Provider, { value: contextValue }, children);
+  return /* @__PURE__ */ React5.createElement(AuthContext_default.Provider, { value: contextValue }, children);
 };
 var AuthProvider = ({ children }) => {
-  return /* @__PURE__ */ React.createElement(CSRFProvider_default, null, /* @__PURE__ */ React.createElement(AuthProviderInner, null, children));
+  return /* @__PURE__ */ React5.createElement(CSRFProvider_default, null, /* @__PURE__ */ React5.createElement(AuthProviderInner, null, children));
 };
 var AuthProvider_default = AuthProvider;
 

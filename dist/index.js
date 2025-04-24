@@ -37,7 +37,7 @@ __export(index_exports, {
 module.exports = __toCommonJS(index_exports);
 
 // src/providers/AuthProvider.tsx
-var import_react5 = require("react");
+var import_react5 = __toESM(require("react"));
 
 // src/contexts/AuthContext.ts
 var import_react = require("react");
@@ -87,7 +87,7 @@ var useCSRFContext_default = useCSRFContext;
 var import_axios3 = __toESM(require("axios"));
 
 // src/providers/CSRFProvider.tsx
-var import_react4 = require("react");
+var import_react4 = __toESM(require("react"));
 var import_axios2 = __toESM(require("axios"));
 var CSRFProvider = ({ children }) => {
   const [csrfToken, setCsrfToken] = (0, import_react4.useState)();
@@ -106,7 +106,7 @@ var CSRFProvider = ({ children }) => {
     };
     fetchCSRFToken();
   }, []);
-  return /* @__PURE__ */ React.createElement(CSRFContext_default.Provider, { value: csrfToken }, children);
+  return /* @__PURE__ */ import_react4.default.createElement(CSRFContext_default.Provider, { value: csrfToken }, children);
 };
 var CSRFProvider_default = CSRFProvider;
 
@@ -219,10 +219,10 @@ var AuthProviderInner = ({ children }) => {
     login,
     logout
   };
-  return /* @__PURE__ */ React.createElement(AuthContext_default.Provider, { value: contextValue }, children);
+  return /* @__PURE__ */ import_react5.default.createElement(AuthContext_default.Provider, { value: contextValue }, children);
 };
 var AuthProvider = ({ children }) => {
-  return /* @__PURE__ */ React.createElement(CSRFProvider_default, null, /* @__PURE__ */ React.createElement(AuthProviderInner, null, children));
+  return /* @__PURE__ */ import_react5.default.createElement(CSRFProvider_default, null, /* @__PURE__ */ import_react5.default.createElement(AuthProviderInner, null, children));
 };
 var AuthProvider_default = AuthProvider;
 
