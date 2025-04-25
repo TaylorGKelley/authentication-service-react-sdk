@@ -33,7 +33,7 @@ const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
         const response = await api.get<{
           isAuthenticated: boolean;
           user: User;
-        }>('/check-auth');
+        }>('https://localhost:7001/api/v1/check-auth');
 
         setIsAuthenticated(response.data.isAuthenticated);
         setUser(response.data.user);
@@ -99,7 +99,7 @@ const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
         ) {
           try {
             const response = await axios.post<{ accessToken: string }>(
-              '/refresh-token',
+              'https://localhost:7001/api/v1/refresh-token',
               undefined,
               {
                 headers: {

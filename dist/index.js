@@ -120,7 +120,7 @@ var AuthProviderInner = ({ children }) => {
     if (accessToken === null) return;
     const fetchAuthState = async () => {
       try {
-        const response = await api_default.get("/check-auth");
+        const response = await api_default.get("https://localhost:7001/api/v1/check-auth");
         setIsAuthenticated(response.data.isAuthenticated);
         setUser(response.data.user);
       } catch {
@@ -162,7 +162,7 @@ var AuthProviderInner = ({ children }) => {
         if (error.response.status === 403 && error.response.data.message === "Invalid access token" || error.response.status === 401 && error.response.data.message !== "Refresh token not found" && accessToken === void 0) {
           try {
             const response = await import_axios3.default.post(
-              "/refresh-token",
+              "https://localhost:7001/api/v1/refresh-token",
               void 0,
               {
                 headers: {
