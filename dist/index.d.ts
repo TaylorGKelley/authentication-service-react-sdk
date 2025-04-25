@@ -1,7 +1,10 @@
-import { FC, PropsWithChildren, Dispatch, SetStateAction } from 'react';
+import React, { PropsWithChildren, Dispatch, SetStateAction } from 'react';
 import * as axios from 'axios';
 
-declare const AuthProvider: FC<PropsWithChildren>;
+type AuthProviderProps = PropsWithChildren & {
+    baseUrl: string;
+};
+declare const AuthProvider: ({ baseUrl, children }: AuthProviderProps) => React.JSX.Element;
 
 declare const useAuthContext: () => AuthContextType;
 

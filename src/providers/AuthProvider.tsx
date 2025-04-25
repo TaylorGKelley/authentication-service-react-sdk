@@ -1,23 +1,26 @@
 import React, {
-  FC,
-  PropsWithChildren,
   useEffect,
   useLayoutEffect,
   useState,
+  type PropsWithChildren,
 } from 'react';
-import User from '../types/User';
+import type User from '../types/User';
 import AuthContext from '../contexts/AuthContext';
-import AuthContextType from '../types/AuthContextType';
+import type AuthContextType from '../types/AuthContextType';
 import api from '../lib/api';
 import useCSRFContext from '../hooks/useCSRFContext';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 import CSRFProvider from './CSRFProvider';
 
 type AxiosRequestConfigWithRetry = AxiosRequestConfig & {
   _retry?: boolean;
 };
 
-const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
+type AuthProviderProps = PropsWithChildren & {
+  baseUrl: string;
+};
+
+const AuthProviderInner = ({ baseUrl, children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState<string | null | undefined>();
   const [user, setUser] = useState<User | null | undefined>();
@@ -33,7 +36,9 @@ const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
         const response = await api.get<{
           isAuthenticated: boolean;
           user: User;
-        }>('https://localhost:7001/api/v1/check-auth');
+        }>(
+          `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}api/v1/check-auth`
+        );
 
         setIsAuthenticated(response.data.isAuthenticated);
         setUser(response.data.user);
@@ -99,7 +104,9 @@ const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
         ) {
           try {
             const response = await axios.post<{ accessToken: string }>(
-              'https://localhost:7001/api/v1/refresh-token',
+              `${
+                baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'
+              }api/v1/refresh-token`,
               undefined,
               {
                 headers: {
@@ -175,10 +182,10 @@ const AuthProviderInner: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+const AuthProvider = ({ baseUrl, children }: AuthProviderProps) => {
   return (
-    <CSRFProvider>
-      <AuthProviderInner>{children}</AuthProviderInner>
+    <CSRFProvider baseUrl={baseUrl}>
+      <AuthProviderInner baseUrl={baseUrl}>{children}</AuthProviderInner>
     </CSRFProvider>
   );
 };

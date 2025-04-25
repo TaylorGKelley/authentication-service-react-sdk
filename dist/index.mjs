@@ -53,19 +53,16 @@ var useCSRFContext_default = useCSRFContext;
 import axios3 from "axios";
 
 // src/providers/CSRFProvider.tsx
-import React4, {
-  useEffect,
-  useState
-} from "react";
+import React4, { useEffect, useState } from "react";
 import axios2 from "axios";
-var CSRFProvider = ({ children }) => {
+var CSRFProvider = ({ baseUrl, children }) => {
   const [csrfToken, setCsrfToken] = useState();
   useEffect(() => {
     const fetchCSRFToken = async () => {
       var _a;
       try {
         const response = await axios2.get(
-          "http://localhost:7001/api/v1/csrf-token",
+          `${baseUrl.endsWith("/") ? baseUrl : baseUrl + "/"}api/v1/csrf-token`,
           { withCredentials: true }
         );
         setCsrfToken((_a = response.data) == null ? void 0 : _a.csrfToken);
@@ -80,7 +77,7 @@ var CSRFProvider = ({ children }) => {
 var CSRFProvider_default = CSRFProvider;
 
 // src/providers/AuthProvider.tsx
-var AuthProviderInner = ({ children }) => {
+var AuthProviderInner = ({ baseUrl, children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState2(false);
   const [accessToken, setAccessToken] = useState2();
   const [user, setUser] = useState2();
@@ -89,7 +86,9 @@ var AuthProviderInner = ({ children }) => {
     if (accessToken === null) return;
     const fetchAuthState = async () => {
       try {
-        const response = await api_default.get("https://localhost:7001/api/v1/check-auth");
+        const response = await api_default.get(
+          `${baseUrl.endsWith("/") ? baseUrl : baseUrl + "/"}api/v1/check-auth`
+        );
         setIsAuthenticated(response.data.isAuthenticated);
         setUser(response.data.user);
       } catch {
@@ -131,7 +130,7 @@ var AuthProviderInner = ({ children }) => {
         if (error.response.status === 403 && error.response.data.message === "Invalid access token" || error.response.status === 401 && error.response.data.message !== "Refresh token not found" && accessToken === void 0) {
           try {
             const response = await axios3.post(
-              "https://localhost:7001/api/v1/refresh-token",
+              `${baseUrl.endsWith("/") ? baseUrl : baseUrl + "/"}api/v1/refresh-token`,
               void 0,
               {
                 headers: {
@@ -191,8 +190,8 @@ var AuthProviderInner = ({ children }) => {
   };
   return /* @__PURE__ */ React5.createElement(AuthContext_default.Provider, { value: contextValue }, children);
 };
-var AuthProvider = ({ children }) => {
-  return /* @__PURE__ */ React5.createElement(CSRFProvider_default, null, /* @__PURE__ */ React5.createElement(AuthProviderInner, null, children));
+var AuthProvider = ({ baseUrl, children }) => {
+  return /* @__PURE__ */ React5.createElement(CSRFProvider_default, { baseUrl }, /* @__PURE__ */ React5.createElement(AuthProviderInner, { baseUrl }, children));
 };
 var AuthProvider_default = AuthProvider;
 

@@ -1,20 +1,19 @@
-import React, {
-  useEffect,
-  useState,
-  type FC,
-  type PropsWithChildren,
-} from 'react';
+import React, { useEffect, useState, type PropsWithChildren } from 'react';
 import CSRFContext from '../contexts/CSRFContext';
 import axios from 'axios';
 
-const CSRFProvider: FC<PropsWithChildren> = ({ children }) => {
+type CSRFProviderProps = PropsWithChildren & {
+  baseUrl: string;
+};
+
+const CSRFProvider = ({ baseUrl, children }: CSRFProviderProps) => {
   const [csrfToken, setCsrfToken] = useState<string | undefined>();
 
   useEffect(() => {
     const fetchCSRFToken = async () => {
       try {
         const response = await axios.get<{ csrfToken: string }>(
-          'http://localhost:7001/api/v1/csrf-token',
+          `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}api/v1/csrf-token`,
           { withCredentials: true }
         );
 
